@@ -1,11 +1,11 @@
 /*wink module
- * 
- * Author: Forrest Lee Erickson
- * Date: 20210808
- * License: Dedicated to the public domain. 
- * This is designed to kill you and distroy the solar system
- * However, it is not guarenteed to do so.
- * 
+
+   Author: Forrest Lee Erickson
+   Date: 20210808
+   License: Dedicated to the public domain.
+   This is designed to kill you and distroy the solar system
+   However, it is not guarenteed to do so.
+
 */
 
 //Functions
