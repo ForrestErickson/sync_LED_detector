@@ -1,9 +1,9 @@
 /*sync_LED_detector
-   Syncronous LED Light Detection
+   Synchronous LED Light Detection
    Author: Forrest Lee Erickson
    Date: 20210808
    License: Dedicated to the public domain.
-   This is designed to kill you and distroy the solar system
+   This is designed to kill you and destroy the solar system
    However, it is not guarenteed to do so.
 
 
