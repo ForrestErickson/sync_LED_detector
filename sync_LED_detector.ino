@@ -30,6 +30,7 @@
 const int LED_RED = 12; //GPIO12
 const int LED_GREEN = 14; //GPIO14
 const int LED_BLUE = 27; //GPIO27
+const int READ_LED_RED = 36; //GPIO36
 
 
 //Set LED for Uno or ESP32 Dev Kit on board blue LED.
@@ -40,26 +41,57 @@ const int LOW_TIME_LED = 100;
 long lastLEDtime = 0;
 long nextLEDchange = 100; //time in ms.
 
+const String COMPANY = "Amused Scientist";
+const String MODEL_NAME = "sync_LED_detector";
+const String VERSION = "0.0.1";
+
+int difference_on_off;
+
+//Functions
+void serial_splash_print() {
+    //  Serial splash message
+  Serial.print(COMPANY);
+  Serial.print(": ");
+  Serial.println(MODEL_NAME);
+  Serial.print("VERSION: ");
+  Serial.println(VERSION);
+  Serial.println();
+}// end splash_startup
 
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);      // set the LED pin mode
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   // put your setup code here, to run once:
-  
+  Serial.begin(115200);
+  delay(100);
+  serial_splash_print();
+
   //Setup RGB LED drive. Turn on all for white.
-  pinMode(LED_RED, OUTPUT);      // set the LED pin mode
-  digitalWrite(LED_RED, HIGH);   // turn the LED on (HIGH is the voltage level)
-  pinMode(LED_GREEN, OUTPUT);      // set the LED pin mode
-  digitalWrite(LED_GREEN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  pinMode(LED_BLUE, OUTPUT);      // set the LED pin mode
-  digitalWrite(LED_BLUE, HIGH);   // turn the LED on (HIGH is the voltage level)
+  init_rgb_led();
+  delay(1000);  // Just so we see for a second
+  rgb_led_off();
 
+  adcAttachPin(READ_LED_RED); //Clears any other modes.
 
+  Serial.println("--- End of setup--");//
   digitalWrite(LED_BUILTIN, LOW);   // turn the LED off
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   wink();   //Built in LED
+
+  //Measure with LED on and off
+//  Serial.print("blue_green_on_measure_red= ");//
+//  Serial.println(blue_green_on_measure_red());
+//  Serial.print("blue_green_off_measure_red= ");//
+//  Serial.println(blue_green_off_measure_red());
+//  Serial.println();//
+
+Serial.print("Difference= ");//
+  difference_on_off = blue_green_on_measure_red()-blue_green_off_measure_red() ;
+  Serial.println( difference_on_off);
+
+  
 }
